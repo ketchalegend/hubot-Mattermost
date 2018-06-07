@@ -1,0 +1,51 @@
+<% include header %>
+<form action="/delete" method="post">
+<h3> Are you sure you want to delete this entry?</h1>
+<div class="form-group row">
+  <label for="match_value" class="col-xs-2 col-form-label">Match</label>
+  <div class="col-xs-10">
+    <input type="text" class="form-control" id="match_value" name="match_value" required value="<%= message['match'] %>" readonly=true>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="at_user" class="col-xs-2 col-form-label">Reply @ User</label>
+  <div class="col-xs-1">
+    <% if (message['at_user']) { %>
+    <%  at_user = "checked"; %>
+    <% } else { %>
+    <%  at_user = ""; %>
+    <% } %>
+    <input type="checkbox" class="form-check-input" id="at_user" name="at_user" <%= at_user %> disabled=disabled>
+  </div>
+  <label for="exact_match" class="col-xs-2 col-form-label">Only Match These Words</label>
+    <% if (message['exact_match']) { %>
+    <%  exact_match = "checked"; %>
+    <% } else { %>
+    <%  exact_match = ""; %>
+    <% } %>
+  <div class="col-xs-7">
+    <input type="checkbox" class="form-check-input" id="exact_match" name="exact_match" <%= exact_match %> disabled=disabled>
+  </div>
+</div>
+
+<input type="hidden" name="id" value="<%= passed=id %>">
+<% for (var i = 0; i < message.responses.length; i = i + 1) { %>
+  <div class="form-group row" id="message_value<%= i %>">
+    <label for="message_value<%= i %>" class="col-xs-2 col-form-label">
+    <% if (i == 0) { %>
+      Response(s)
+    <% } %>
+    </label>
+    <div class="col-xs-10">
+      <input type="text" class="form-control" id="message_value<%= i %>" name="message_value<%= i %>" required value="<%= message.responses[i] %>" readonly=true>
+    </div>
+  </div>
+<% } %>
+
+<div class="form-group row">
+<button type="submit" class="btn btn-danger">Delete</button>
+<a href="/edit/<%= id %>" class="btn btn-default" role="button">Cancel</a>
+</div>
+</form>
+
+<% include footer %>
