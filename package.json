@@ -22,10 +22,16 @@
     "hubot-rules": "^0.1.2",
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "^0.2.1",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "snyk": "^1.88.2"
   },
   "engines": {
     "node": "0.10.x"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
